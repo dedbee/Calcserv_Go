@@ -35,26 +35,22 @@ func New() *Application {
 	}
 }
 
-// Функция запуска приложения
-// тут будем чиать введенную строку и после нажатия ENTER писать результат работы программы на экране
-// если пользователь ввел exit - то останаваливаем приложение
 func (a *Application) Run() error {
 	for {
-		// читаем выражение для вычисления из командной строки
 		log.Println("input expression")
 		reader := bufio.NewReader(os.Stdin)
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			log.Println(calculation.ErrFailedToReadInput)
 		}
-		// убираем пробелы, чтобы оставить только вычислемое выражение
+
 		text = strings.TrimSpace(text)
-		// выходим, если ввели команду "exit"
+
 		if text == "exit" {
 			log.Println("aplication was successfully closed")
 			return nil
 		}
-		//вычисляем выражение
+
 		result, err := calculation.Calc(text)
 		if err != nil {
 			log.Println(text, " calculation failed wit error: ", err)
@@ -71,9 +67,11 @@ type Request struct {
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
 	request := new(Request)
 	defer r.Body.Close()
+
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		http.Error(w, calculation.ErrInvalidRequestBody.Error(), http.StatusBadRequest)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Internal server error"})
 		return
 	}
 
@@ -82,17 +80,16 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 		if errors.Is(err, calculation.ErrDivisionByZero) {
 			w.WriteHeader(http.StatusUnprocessableEntity)
 			json.NewEncoder(w).Encode(map[string]string{"error": "Division by zero"})
-			return // Завершаем выполнение функции после обработки этой ошибки
+			return
 		} else if errors.Is(err, calculation.ErrInvalidExpression) {
 			w.WriteHeader(http.StatusUnprocessableEntity)
 			json.NewEncoder(w).Encode(map[string]string{"error": "Expression is not valid"})
-			return // Завершаем выполнение функции после обработки этой ошибки
+			return
 		} else {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": "Internal server error"})
-			return // Завершаем выполнение функции после обработки этой ошибки
+			return
 		}
-
 	} else {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]interface{}{"result": result})
