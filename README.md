@@ -47,3 +47,11 @@ A web service for calculating arithmetic expressions
 }
 и кодом 500
 ![image](https://github.com/user-attachments/assets/70e33626-5929-49ca-bb17-9fe0bae18a6a)
+
+Отправлять запросы на веб-сервис можно с помощью curl:
+curl --location 'localhost/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+  "expression": "2+2*2"
+}'
+Или с помощью сервиса Postman: https://web.postman.co/
