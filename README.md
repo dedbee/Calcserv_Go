@@ -48,4 +48,5 @@ A web service for calculating arithmetic expressions
 и кодом 500
 
 Также при некорректном тесте запроса пользователь увидит на экране ошибку: "invalid request body".
+![image](https://github.com/user-attachments/assets/f8968ed1-af0d-4cc4-bbc0-78d995f67e15)
 ![image](https://github.com/user-attachments/assets/6c5c5531-f316-4cba-90aa-35e9ef72c426)
