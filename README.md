@@ -40,13 +40,10 @@ A web service for calculating arithmetic expressions
 ![image](https://github.com/user-attachments/assets/022f0f61-c3b9-41e8-ad83-3f82055930e2)
 ![image](https://github.com/user-attachments/assets/fa961daa-87b2-4f47-b95c-80002cb755f3)
 
-В случае других ошибок пользователь получит HTTP-ответ с телом:
+В случае других ошибок (некорректный текст запроса, сбой со стороны сервера и тп.) пользователь получит HTTP-ответ с телом:
 
 {
     "error":"Internal server error"
 }
 и кодом 500
-
-Также при некорректном тексте запроса пользователь увидит на экране ошибку: "invalid request body" с кодом 400.
-![image](https://github.com/user-attachments/assets/f8968ed1-af0d-4cc4-bbc0-78d995f67e15)
-![image](https://github.com/user-attachments/assets/6c5c5531-f316-4cba-90aa-35e9ef72c426)
+![image](https://github.com/user-attachments/assets/70e33626-5929-49ca-bb17-9fe0bae18a6a)
