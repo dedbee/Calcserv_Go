@@ -54,4 +54,5 @@ curl --location 'localhost/api/v1/calculate' \\
 --data '{
   "expression": "2+2*2"
 }'  
-Или с помощью сервиса Postman: https://web.postman.co/
+Или с помощью сервиса Postman: https://web.postman.co/  
+Чтобы завершить работу программы нажмите Ctrl+C
