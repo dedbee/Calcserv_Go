@@ -53,5 +53,5 @@ curl --location 'localhost/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
   "expression": "2+2*2"
-}'
+}'/n
 Или с помощью сервиса Postman: https://web.postman.co/
