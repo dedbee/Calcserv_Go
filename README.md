@@ -20,6 +20,8 @@ A web service for calculating arithmetic expressions
 }
 и кодом 200
 ![image](https://github.com/user-attachments/assets/7a3ff61d-d235-465d-91dd-5651e01c5233)
+![image](https://github.com/user-attachments/assets/719803b0-3a10-4400-bd8b-582e3989e267)
+
 
 В случае деления на ноль пользователь получит HTTP-ответ с телом:
 
