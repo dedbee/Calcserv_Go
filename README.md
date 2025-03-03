@@ -28,3 +28,13 @@ CalcServ_Go/
 `git clone https://github.com/dedbee/Calcserv_Go.git`  
 Запустите проект:  
 `go run cmd/main.go`  
+
+Чтобы проверить тесты введите в терминал:  
+`go test internal/application/application_test.go`  
+или  
+`go test internal/agent/agent_test.go`  
+или  
+`go test internal/orchestrator/orchestrator_test.go`  
+или  
+`go test pkg/calculation/calculation_test.go`  
+в зависимости от того, что вы хотите протестировать.  
