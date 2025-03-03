@@ -33,8 +33,7 @@ CalcServ_Go/
 --header 'Content-Type: application/json' \  
 --data '{  
   "expression": "2 + 3 * 4"  
-}'  
-`  
+}'`  
 Получите список всех выражений:  
 `curl --location 'http://localhost:8080/api/v1/expressions'`  
  Получите выражение по его идентификатору:  
