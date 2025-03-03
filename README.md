@@ -5,26 +5,26 @@
   -Агент — выполняет задачи, полученные от оркестратора, и возвращает результаты.  
 Проект написан на языке Go и использует HTTP для взаимодействия между компонентами.  
 
-Структура проекта
-CalcServ_Go/
+Структура проекта  
+CalcServ_Go/  
   cmd/
-    main.go                # Точка входа в приложение
-internal/
-  agent/                 # Логика агента
-    agent.go
-  application/           # Логика приложения
-    application.go
-  orchestrator/          # Логика оркестратора
-    orchestrator.go
-pkg/
-  calculation/           # Логика вычислений
-    calculation.go
-    errors.go
-go.mod
-README.md                  # Документация
+    main.go                # Точка входа в приложение  
+internal/  
+  agent/                 # Логика агента  
+    agent.go  
+  application/           # Логика приложения  
+    application.go  
+  orchestrator/          # Логика оркестратора  
+    orchestrator.go  
+pkg/  
+  calculation/           # Логика вычислений  
+    calculation.go  
+    errors.go  
+go.mod  
+README.md                  # Документация  
 
-Инструкция по запуску
-Клонируйте репозиторий:
-`git clone https://github.com/ваш-username/CalcServ_Go.git`
-Запустите проект:
-`go run cmd/main.go`
+Инструкция по запуску  
+Клонируйте репозиторий:  
+`git clone https://github.com/dedbee/Calcserv_Go.git`  
+Запустите проект:  
+`go run cmd/main.go`  
