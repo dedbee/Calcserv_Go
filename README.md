@@ -7,21 +7,21 @@
 
 Структура проекта  
 CalcServ_Go/  
-  cmd/
-    main.go                # Точка входа в приложение  
-internal/  
-  agent/                 # Логика агента  
-    agent.go  
-  application/           # Логика приложения  
-    application.go  
-  orchestrator/          # Логика оркестратора  
-    orchestrator.go  
-pkg/  
-  calculation/           # Логика вычислений  
-    calculation.go  
-    errors.go  
-go.mod  
-README.md                  # Документация  
+├── cmd/
+│   └── main.go                # Точка входа в приложение (оркестратор)  
+├── internal/  
+│   ├── agent/                 # Логика агента (вычислителя)  
+│   │   └── agent.go
+│   ├── application/           # Логика приложения (оркестратора)  
+│   │   └── application.go  
+│   └── orchestrator/          # Логика оркестратора (управление задачами)  
+│       └── orchestrator.go  
+├── pkg/  
+│   ├── calculation/           # Логика вычислений (арифметические операции)  
+│   │   ├── calculation.go  
+│   │   └── errors.go  
+├── go.mod                     # Файл модуля Go (зависимости)  
+└── README.md                  # Документация проекта  
 
 Инструкция по запуску  
 Клонируйте репозиторий:  
