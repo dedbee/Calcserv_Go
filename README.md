@@ -28,7 +28,18 @@ CalcServ_Go/
 `git clone https://github.com/dedbee/Calcserv_Go.git`  
 Запустите проект:  
 `go run cmd/main.go`  
-
+Добавте арифметическое выражение для вычисления:  
+`curl --location 'http://localhost:8080/api/v1/calculate' \  
+--header 'Content-Type: application/json' \  
+--data '{  
+  "expression": "2 + 3 * 4"  
+}'  
+`  
+Получите список всех выражений:  
+`curl --location 'http://localhost:8080/api/v1/expressions'`  
+ Получите выражение по его идентификатору:  
+ `curl --location 'http://localhost:8080/api/v1/expressions/1'`  
+  
 Чтобы проверить тесты введите в терминал:  
 `go test internal/application/application_test.go`  
 или  
@@ -38,3 +49,5 @@ CalcServ_Go/
 или  
 `go test pkg/calculation/calculation_test.go`  
 в зависимости от того, что вы хотите протестировать.  
+
+Примеры использлвания приложения:  
