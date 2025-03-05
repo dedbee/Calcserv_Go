@@ -1,7 +1,8 @@
 # Calcserv_Go - сервис подсчета арифметических выражений.
 
 Этот проект представляет собой асинхронный сервер для вычисления арифметических выражений. Сервер состоит из двух основных компонентов:  
-  -Оркестратор — принимает арифметические выражения от пользователей, разбивает их на задачи и управляет их выполнением.  
+  -Оркестратор — принимает арифметические выражения от пользователей, разбивает их на задачи и управляет их выполнением. 
+  Оркестратор слушает HTTP-запросы на порту, указанном в переменной окружения PORT. Если переменная не установлена, по умолчанию используется порт 8080.  
   -Агент — выполняет задачи, полученные от оркестратора, и возвращает результаты.  
 Проект написан на языке Go и использует HTTP для взаимодействия между компонентами.  
 
@@ -30,15 +31,12 @@ CalcServ_Go/
 Запустите проект:  
 `go run cmd/main.go`  
 Добавте арифметическое выражение для вычисления:  
-`curl --location 'http://localhost:8080/api/v1/calculate' \  
---header 'Content-Type: application/json' \  
---data '{  
-  "expression": "2 + 3 * 4"  
-}'`  
+`curl -X POST http://localhost:8080/api/v1/calculate -d '{"expression": "2 + 2"}' -H "Content-Type: application/json"`  
+Этот запрос добавляет арифметическое выражение и возвращает ID задачи.  
 Получите список всех выражений:  
-`curl --location 'http://localhost:8080/api/v1/expressions'`  
- Получите выражение по его идентификатору:  
- `curl --location 'http://localhost:8080/api/v1/expressions/1'`  
+`curl http://localhost:8080/api/v1/expressions`  
+Получите выражение по его идентификатору:  
+`curl --location 'http://localhost:8080/api/v1/expressions/1'`  
   
 Чтобы протестировать сам калькулятор (логику вычислений) запустите тест:  
 `go test pkg/calculation/calculation_test.go`  
@@ -49,3 +47,56 @@ CalcServ_Go/
 422 (неправильное выражение (оно содержит два знака операции подряд или незакрытые скобки, деление на 0) (Unprocessable Entity))  
 404 (не найдено выражение, к которому Вы хотите обратиться (Not Found))  
 500 (ошибка сервера (Internal Server Error))  
+
+Примеры использования приложения.  
+1: Успешное вычисление выражения  
+Пользователь отправляет выражение:  
+`curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+  "expression": "2 + 3 * 4"
+}'`  
+Ответ:  
+`{
+    "id": 1
+}`  
+(Код ответа 201)  
+
+Пользователь запрашивает результат:  
+`curl --location 'http://localhost:8080/api/v1/expressions/1'`  
+Ответ:  
+`{
+    "expression": {
+        "id": 1,
+        "expression": "2 + 3 * 4",
+        "status": "completed",
+        "result": 14
+    }
+}`  
+(Код 200)  
+  
+2: Ошибка в выражении  
+Пользователь отправляет выражение с ошибкой:  
+`curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+  "expression": "2 + abc"
+}'`  
+Ответ:  
+`{
+    "error": "Expression is not valid"
+}`  
+(Код 422)  
+  
+3: Внутренняя ошибка сервера  
+Пользователь отправляет выражение, но сервер не может его обработать:  
+`curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+  "expression": "2 / 0"
+}'`  
+Ответ:  
+`{
+    "error": "Internal server error"
+}`  
+(Код 500)  
