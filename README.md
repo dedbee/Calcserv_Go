@@ -19,6 +19,7 @@ CalcServ_Go/
 ├── pkg/  
 │   ├── calculation/           # Логика вычислений (арифметические операции)  
 │   │   ├── calculation.go  
+|   |   ├── calculation_test.go # Тест самого калькулятора  
 │   │   └── errors.go  
 ├── go.mod                     # Файл модуля Go (зависимости)  
 └── README.md                  # Документация проекта  
@@ -39,14 +40,12 @@ CalcServ_Go/
  Получите выражение по его идентификатору:  
  `curl --location 'http://localhost:8080/api/v1/expressions/1'`  
   
-Чтобы проверить тесты введите в терминал:  
-`go test internal/application/application_test.go`  
-или  
-`go test internal/agent/agent_test.go`  
-или  
-`go test internal/orchestrator/orchestrator_test.go`  
-или  
+Чтобы протестировать сам калькулятор (логику вычислений) запустите тест:  
 `go test pkg/calculation/calculation_test.go`  
-в зависимости от того, что вы хотите протестировать.  
 
-Примеры использлвания приложения:  
+Сервер возвращает следущие коды ответов:  
+201 (создано новое вырожение, которому присвоен собственный идентификатор (Created))  
+200 (все хорошо (OK))  
+422 (неправильное выражение (оно содержит два знака операции подряд или незакрытые скобки, деление на 0) (Unprocessable Entity))  
+404 (не найдено выражение, к которому Вы хотите обратиться (Not Found))  
+500 (ошибка сервера (Internal Server Error))  
